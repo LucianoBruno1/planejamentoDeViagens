@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Destinos</title>
+</head>
+<body>
+    <h1>DESTINOS DISPONÍVEIS!</h1>
+
+    <!-- Botões para filtrar por continente -->
+    <div>
+        <a href="?continent=AS"><button>Ásia</button></a>
+        <a href="?continent=EU"><button>Europa</button></a>
+        <a href="?continent=NA"><button>América do Norte</button></a>
+        <a href="?continent=SA"><button>América do Sul</button></a>
+        <a href="?continent=AF"><button>África</button></a>
+        <a href="?continent=OC"><button>Oceania</button></a>
+        <a href="?continent=AN"><button>Antártica</button></a>
+        <a href="/destinations/"><button>Todos</button></a>
+    </div>
+
+    <!-- Lista de destinos filtrados -->
+    <ul>
+        {% for destination in destinations %}
+            <li>
+                <h2>{{ destination.name }}</h2>
+                <img src="{{ destination.image.url }}" alt="{{ destination.name }}" style="width:100px;height:100px;">
+                <p>{{ destination.description }}</p>
+                <p><strong>Continente:</strong> {{ destination.continent }}</p>
+            </li>
+        {% empty %}
+            <li>Não há destinos para este continente.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
