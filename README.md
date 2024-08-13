@@ -19,7 +19,26 @@
   <li>
     CSS
   </li>
+</ul>
+
+<h3>Funcionalidades</h3>
+<ul>
   <li>
-    JavaScript
+    Registro e login de usuários
+  </li>
+  <li>
+    Recuperação de senha
+  </li>
+  <li>
+    Cadastro de destinos pelo administrador
+  </li>
+  <li>
+    Visualização de destinos pelo usuário
+  </li>
+  <li>
+    Lista de desejos
+  </li>
+  <li>
+    Destinos com preço médio de Hotéis e Passagens aéreas
   </li>
 </ul>
