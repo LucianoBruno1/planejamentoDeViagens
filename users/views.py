@@ -34,14 +34,14 @@ def user_login(request):
                 login(request, user)
                 return redirect('home')  # Redireciona para a página inicial após o login bem-sucedido
         else:
-            return render(request, 'login.html', {'form': form, 'error': 'Nome de usuário ou senha inválidos'})
+            return render(request, 'registration/login.html', {'form': form, 'error': 'Nome de usuário ou senha inválidos'})
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'registration/login.html', {'form': form})
 
 
 class CustomLoginView(LoginView):
-    template_name = 'login.html'
+    template_name = 'registration/login.html'
 
     def form_invalid(self, form):
         messages.error(self.request, 'Nome de usuário ou senha inválidos. Tente novamente.')

@@ -5,32 +5,58 @@
     <title>Destinos</title>
 </head>
 <body>
-    <h1>DESTINOS DISPONÍVEIS!</h1>
+<h1>DESTINOS DISPONÍVEIS!</h1>
 
-    <!-- Botões para filtrar por continente -->
-    <div>
-        <a href="?continent=AS"><button>Ásia</button></a>
-        <a href="?continent=EU"><button>Europa</button></a>
-        <a href="?continent=NA"><button>América do Norte</button></a>
-        <a href="?continent=SA"><button>América do Sul</button></a>
-        <a href="?continent=AF"><button>África</button></a>
-        <a href="?continent=OC"><button>Oceania</button></a>
-        <a href="?continent=AN"><button>Antártica</button></a>
-        <a href="/destinations/"><button>Todos</button></a>
-    </div>
+<!-- Botões para filtrar por continente -->
+<div>
+    <a href="?continent=AS">
+        <button>Ásia</button>
+    </a>
+    <a href="?continent=EU">
+        <button>Europa</button>
+    </a>
+    <a href="?continent=NA">
+        <button>América do Norte</button>
+    </a>
+    <a href="?continent=SA">
+        <button>América do Sul</button>
+    </a>
+    <a href="?continent=AF">
+        <button>África</button>
+    </a>
+    <a href="?continent=OC">
+        <button>Oceania</button>
+    </a>
+    <a href="?continent=AN">
+        <button>Antártica</button>
+    </a>
+    <a href="/destinations/">
+        <button>Todos</button>
+    </a>
+</div>
 
-    <!-- Lista de destinos filtrados -->
-    <ul>
-        {% for destination in destinations %}
-            <li>
-                <h2>{{ destination.name }}</h2>
-                <img src="{{ destination.image.url }}" alt="{{ destination.name }}" style="width:100px;height:100px;">
-                <p>{{ destination.description }}</p>
-                <p><strong>Continente:</strong> {{ destination.continent }}</p>
-            </li>
-        {% empty %}
-            <li>Não há destinos para este continente.</li>
-        {% endfor %}
-    </ul>
+<!-- Lista de destinos filtrados -->
+<ul>
+    {% for destination in destinations %}
+        <li>
+            <h2>{{ destination.name }}</h2>
+            <img src="{{ destination.image.url }}" alt="{{ destination.name }}" style="width:100px;height:100px;">
+            <p>{{ destination.description }}</p>
+            <p><strong>Continente:</strong> {{ destination.continent }}</p>
+            <form method="POST" action="{% url 'add_to_wishlist' destination.id %}">
+                {% csrf_token %}
+                <button type="submit" {% if destination in request.user.wishlist.destinations.all %}disabled{% endif %}>
+                    {% if destination in request.user.wishlist.destinations.all %}
+                        Added to Wishlist
+                    {% else %}
+                        Add to Wishlist
+                    {% endif %}
+                </button>
+            </form>
+        </li>
+    {% empty %}
+        <li>Não há destinos para este continente.</li>
+    {% endfor %}
+</ul>
 </body>
 </html>
