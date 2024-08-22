@@ -6,7 +6,7 @@ from planejamentoDeViagens.views import home
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
-
+from . import views
 urlpatterns = ([
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
@@ -15,5 +15,6 @@ urlpatterns = ([
     path('destinations/', include('destinations.urls')),
     path('wishlist/', include('wishlist.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))

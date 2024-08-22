@@ -9,4 +9,6 @@ def destination_list(request):
     else:
         destinations = Destination.objects.all()
 
+
+
     return render(request, 'destination_list.html', {'destinations': destinations})

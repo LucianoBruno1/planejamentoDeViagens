@@ -1,19 +1,130 @@
-<!-- templates/register.html -->
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar</title>
-    {% load static %}  <!-- Carrega a tag static -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1; 
+        }
+        
+        .bg-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .register-container {
+            position: relative;
+            z-index: 1; 
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            margin: auto;
+        }
+
+        .register-container h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .register-container .input-group {
+            margin-bottom: 20px;
+        }
+
+        .register-container .input-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .register-container .input-group label {
+            text-align: left;
+            display: block;
+            font-weight: 700;
+        }
+
+        .register-container button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .register-container button:hover {
+            background-color: #555;
+        }
+
+        .register-container .login-link {
+            margin-top: 10px;
+            display: block;
+            color: #333;
+        }
+
+        .register-container .login-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h2>Registrar</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Registrar</button>
-    </form>
+    <!-- Vídeo de fundo -->
+    <div class="bg-video">
+        <video autoplay muted loop>
+            <source src="../../media/assets_images/video-login-bg.mp4" type="video/mp4">
+            Seu navegador não suporta o elemento de vídeo.
+        </video>
+    </div>
+
+    <!-- Container do registro -->
+    <div class="register-container">
+        <h1>REGISTRE-SE<span style="color: #F0B429;"> !</span></h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="username">Usuário</label>
+                {{ form.username }}
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                {{ form.email }}
+            </div>
+            <div class="input-group">
+                <label for="password1">Senha</label>
+                {{ form.password1 }}
+            </div>
+            <div class="input-group">
+                <label for="password2">Confirme sua Senha</label>
+                {{ form.password2 }}
+            </div>
+            <button type="submit">Registrar</button>
+        </form>
+        <a href="{% url 'login' %}" class="login-link">Já tem uma conta? Faça login</a>
+    </div>
 </body>
 </html>

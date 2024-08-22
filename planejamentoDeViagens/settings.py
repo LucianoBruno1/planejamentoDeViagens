@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'users',
     'destinations',
     'wishlist',
+    'prices',
 ]
 
 MIDDLEWARE = [

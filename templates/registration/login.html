@@ -1,26 +1,123 @@
-<!-- templates/login.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container do vídeo de fundo */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;    
+        }
+
+        .bg-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Container do formulário de login */
+        .login-container {
+            position: relative;
+            z-index: 1; 
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            margin: auto;
+        }
+
+        .login-container h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .login-container .input-group {
+            margin-bottom: 20px;
+        }
+
+        .login-container .input-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-container .input-group label {
+            text-align: left;
+            display: block;
+            font-weight: 700;
+        }
+
+        .login-container button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .login-container button:hover {
+            background-color: #555;
+        }
+
+        .login-container .register-link {
+            margin-top: 10px;
+            display: block;
+            color: #333;
+        }
+
+        .login-container .register-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h2>Login</h2>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
-                {{ message }}
+    <!-- Vídeo de fundo -->
+    <div class="bg-video">
+        <video autoplay muted loop>
+            <source src="../../media/assets_images/video-login-bg.mp4" type="video/mp4">
+            Seu navegador não suporta o elemento de vídeo.  
+        </video>
+    </div>
+
+    <!-- Container do login -->
+    <div class="login-container">
+        <h1>VIAJE COM A GENTE<span style="color: #F0B429;"> !</span></h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" name="username" placeholder="Digite seu usuário">
             </div>
-        {% endfor %}
-    {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-    <p>Não tem uma conta? <a href="{% url 'register' %}">Cadastre-se</a></p>
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Digite sua senha">
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+        <a href="{% url 'register' %}" class="register-link">Não tem uma conta? Registre-se</a>
+    </div>
 </body>
 </html>
