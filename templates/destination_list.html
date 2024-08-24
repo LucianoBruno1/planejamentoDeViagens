@@ -3,60 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <title>Destinos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e7f0f7;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding-top: 60px; /* Espaço para o navbar fixo */
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            width: 100%;
+            background-color: #4a90e2; /* Cor do fundo azul */
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Alinha itens verticalmente */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* Garantir que o navbar fique por cima do conteúdo */
+            padding: 0 20px; /* Espaçamento interno lateral */
+            box-sizing: border-box; /* Inclui padding na largura total */
+            height: 50px; /* Altura fixa para o navbar */
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 10px; /* Ajuste de padding lateral */
+            line-height: 50px; /* Alinha verticalmente com base na altura do navbar */
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .login-register {
+            display: flex;
+            align-items: center;
+        }
+
+        .filters {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .filters button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .filters button:hover {
+            background-color: #357ab8;
+        }
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 destinos por linha */
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .destination-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .destination-item:hover {
+            transform: scale(1.05);
+        }
+
+        .destination-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .destination-item h2 {
+            background-color: white;
+            padding: 10px;
+            margin: 0;
+            color: #333;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000; /* Garantir que o modal fique por cima de tudo */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 1%;
+        }
+
+        .modal-content {
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow-y: auto;
+        }
+
+        .modal-content img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .modal-content h2 {
+            margin-top: 20px;
+            color: #4a90e2;
+        }
+
+        .modal-content .description-box {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            max-height: 30vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        .modal-content .wishlist-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .modal-content .wishlist-buttons button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .modal-content .wishlist-buttons button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-<h1>DESTINOS DISPONÍVEIS!</h1>
+    <div class="navbar">
+        <a href="{% url 'home' %}">HOME</a>
+        <a href="{% url 'destination_list' %}">DESTINOS</a>
+        <a href="#">CONTATO</a>
+        <a href="#">SOBRE</a>
+        <div class="login-register">
+            <a href="{% url 'login' %}">LOGIN</a>
+            <a href="{% url 'register' %}">CADASTRO</a>
+        </div>
+    </div>
 
-<!-- Botões para filtrar por continente -->
-<div>
-    <a href="?continent=AS">
-        <button>Ásia</button>
-    </a>
-    <a href="?continent=EU">
-        <button>Europa</button>
-    </a>
-    <a href="?continent=NA">
-        <button>América do Norte</button>
-    </a>
-    <a href="?continent=SA">
-        <button>América do Sul</button>
-    </a>
-    <a href="?continent=AF">
-        <button>África</button>
-    </a>
-    <a href="?continent=OC">
-        <button>Oceania</button>
-    </a>
-    <a href="?continent=AN">
-        <button>Antártica</button>
-    </a>
-    <a href="/destinations/">
-        <button>Todos</button>
-    </a>
-</div>
+    <h1>Destinos Disponíveis!</h1>
 
-<!-- Lista de destinos filtrados -->
-<ul>
-    {% for destination in destinations %}
-        <li>
-            <h2>{{ destination.name }}</h2>
-            <img src="{{ destination.image.url }}" alt="{{ destination.name }}" style="width:100px;height:100px;">
-            <p>{{ destination.description }}</p>
-            <p><strong>Continente:</strong> {{ destination.continent }}</p>
-            <form method="POST" action="{% url 'add_to_wishlist' destination.id %}">
-                {% csrf_token %}
-                <button type="submit" {% if destination in request.user.wishlist.destinations.all %}disabled{% endif %}>
-                    {% if destination in request.user.wishlist.destinations.all %}
-                        Added to Wishlist
-                    {% else %}
-                        Add to Wishlist
-                    {% endif %}
-                </button>
-            </form>
-        </li>
-    {% empty %}
-        <li>Não há destinos para este continente.</li>
-    {% endfor %}
-</ul>
+    <!-- Botões para filtrar por continente -->
+    <div class="filters">
+        <a href="?continent=AS">
+            <button>Ásia</button>
+        </a>
+        <a href="?continent=EU">
+            <button>Europa</button>
+        </a>
+        <a href="?continent=NA">
+            <button>América do Norte</button>
+        </a>
+        <a href="?continent=SA">
+            <button>América do Sul</button>
+        </a>
+        <a href="?continent=AF">
+            <button>África</button>
+        </a>
+        <a href="?continent=OC">
+            <button>Oceania</button>
+        </a>
+        <a href="?continent=AN">
+            <button>Antártica</button>
+        </a>
+        <a href="/destinations/">
+            <button>Todos</button>
+        </a>
+    </div>
+
+    <!-- Lista de destinos filtrados -->
+    <div class="destination-grid">
+        {% for destination in destinations %}
+            <div class="destination-item" onclick="openModal('{{ destination.id }}')">
+                <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
+                <h2>{{ destination.name }}</h2>
+            </div>
+
+            <!-- Modal para cada destino -->
+            <div id="modal-{{ destination.id }}" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('{{ destination.id }}')">&times;</span>
+                    <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
+                    <h2>{{ destination.name }}</h2>
+                    <p><strong>Continente:</strong> {{ destination.continent }}</p>
+                    <div class="description-box">
+                        <p>{{ destination.description }}</p>
+                    </div>
+                    <div class="wishlist-buttons">
+                        <form method="POST" action="{% url 'add_to_wishlist' destination.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" {% if destination in request.user.wishlist.destinations.all %}disabled{% endif %}>
+                                Adicionar à Lista de Desejos
+                            </button>
+                        </form>
+                        <form method="POST" action="{% url 'remove_from_wishlist' destination.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" {% if destination not in request.user.wishlist.destinations.all %}disabled{% endif %}>
+                                Remover da Lista de Desejos
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Não há destinos para este continente.</p>
+        {% endfor %}
+    </div>
+
+    <script>
+        function openModal(id) {
+            document.getElementById('modal-' + id).style.display = "block";
+        }
+
+        function closeModal(id) {
+            document.getElementById('modal-' + id).style.display = "none";
+        }
+    </script>
+
 </body>
 </html>

@@ -1,0 +1,73 @@
+  body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .bg-image {
+            background: url("../../media/assets_images/background-home.jpeg") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            color: white;
+            text-align: left;
+            position: relative;
+            padding-left: 10%;
+        }
+
+        .content {
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .content h1 {
+            font-size: 4rem;
+            margin: 0;
+        }
+
+        .content p {
+            font-size: 1.25rem;
+            margin: 20px 0;
+        }
+
+        .content a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #007BFF;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .content a:hover {
+            background-color: rgba(255, 255, 255, 1);
+            color: #0056b3;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 80px;
+            width: 70%;
+        }
+        .navbar .login-register {
+            padding-left: 30%;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
