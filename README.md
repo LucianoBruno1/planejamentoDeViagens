@@ -19,6 +19,9 @@
   <li>
     CSS
   </li>
+  <li>
+    JavaScript
+  </li>
 </ul>
 
 <h3>Funcionalidades</h3>
