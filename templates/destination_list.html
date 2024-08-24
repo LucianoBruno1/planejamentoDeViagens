@@ -112,6 +112,8 @@
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.4);
             padding-top: 1%;
+           
+            
         }
 
         .modal-content {
@@ -189,6 +191,7 @@
         <a href="{% url 'destination_list' %}">DESTINOS</a>
         <a href="#">CONTATO</a>
         <a href="#">SOBRE</a>
+         <a href="{% url 'wishlist_view' %}">Desejos</a>
         <div class="login-register">
             <a href="{% url 'login' %}">LOGIN</a>
             <a href="{% url 'register' %}">CADASTRO</a>

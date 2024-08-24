@@ -1,32 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Wishlist</title>
+    <title>Lista de Desejos</title>
+    <style>
+        /* O mesmo estilo que você utilizou na página de destinos */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e7f0f7;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding-top: 60px; /* Espaço para o navbar fixo */
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            width: 100%;
+            background-color: #4a90e2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 0 20px;
+            box-sizing: border-box;
+            height: 50px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 10px;
+            line-height: 50px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .login-register {
+            display: flex;
+            align-items: center;
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .wishlist-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .wishlist-item:hover {
+            transform: scale(1.05);
+        }
+
+        .wishlist-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .wishlist-item h2 {
+            background-color: white;
+            padding: 10px;
+            margin: 0;
+            color: #333;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 1%;
+        }
+
+        .modal-content {
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow-y: auto;
+        }
+
+        .modal-content img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .modal-content h2 {
+            margin-top: 20px;
+            color: #4a90e2;
+        }
+
+        .modal-content .description-box {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            max-height: 30vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        .modal-content .wishlist-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .modal-content .wishlist-buttons button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .modal-content .wishlist-buttons button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .wishlist-date {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Your Wishlist</h1>
+    <div class="navbar">
+        <a href="{% url 'home' %}">HOME</a>
+        <a href="{% url 'destination_list' %}">DESTINOS</a>
+        <a href="#">CONTATO</a>
+        <a href="#">SOBRE</a>
+        <a href="{% url 'wishlist_view' %}">Desejos</a>
+        <div class="login-register">
+            <a href="{% url 'login' %}">LOGIN</a>
+            <a href="{% url 'register' %}">CADASTRO</a>
+        </div>
+    </div>
 
-    {% if wishlist.destinations.all %}
-        <ul>
-            {% for destination in wishlist.destinations.all %}
-                <li>
+    <h1>Minha Lista de Desejos</h1>
+
+    <div class="wishlist-grid">
+        {% for destination in wishlist.destinations.all %}
+            <div class="wishlist-item" onclick="openModal('{{ destination.id }}')">
+                <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
+                <h2>{{ destination.name }}</h2>
+                <p class="wishlist-date">Adicionado em: {{ destination.wishlist_date }}</p>
+                <p>Continente: {{ destination.continent }}</p>
+            </div>
+
+            <!-- Modal para cada destino -->
+            <div id="modal-{{ destination.id }}" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('{{ destination.id }}')">&times;</span>
+                    <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
                     <h2>{{ destination.name }}</h2>
-                    <img src="{{ destination.image.url }}" alt="{{ destination.name }}" style="width:100px;height:100px;">
-                    <p>{{ destination.description }}</p>
                     <p><strong>Continente:</strong> {{ destination.continent }}</p>
-                    <form method="POST" action="{% url 'remove_from_wishlist' destination.id %}">
-                        {% csrf_token %}
-                        <button type="submit">Remove from Wishlist</button>
-                    </form>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Your wishlist is empty.</p>
-    {% endif %}
+                    <div class="description-box">
+                        <p>{{ destination.description }}</p>
+                    </div>
+                    <p class="wishlist-date">Adicionado em: {{ destination.wishlist_date }}</p>
+                    <div class="wishlist-buttons">
+                        <form method="POST" action="{% url 'remove_from_wishlist' destination.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Remover da Lista de Desejos</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Não há destinos na sua lista de desejos.</p>
+        {% endfor %}
+    </div>
 
-    <a href="{% url 'destination_list' %}">Back to Destinations</a>
+    <script>
+        function openModal(id) {
+            document.getElementById('modal-' + id).style.display = "block";
+        }
+
+        function closeModal(id) {
+            document.getElementById('modal-' + id).style.display = "none";
+        }
+    </script>
+
 </body>
 </html>
