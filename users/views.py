@@ -24,6 +24,9 @@ def register(request):
 def profile(request):
     return render(request, 'profile.html')
 
+def contact(request):
+    return render(request, 'contact.html')
+
 def about(request):
     return render(request, 'about.html')
 def user_login(request):
