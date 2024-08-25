@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Mensagem Enviada</title>
+</head>
+<style>
+     .navbar {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        padding: 0 20px;
+        box-sizing: border-box;
+        height: 50px;
+    }
+
+    .navbar a {
+        color: black;
+        text-decoration: none;
+        font-weight: 700;
+        padding: 0 10px;
+        line-height: 50px;
+    }
+
+    .navbar a:hover {
+        text-decoration: underline;
+    }
+
+    .login-register {
+        display: flex;
+        align-items: center;
+    }
+    h2{
+        padding-top: 50px;
+    }
+</style>
+<body>
+<div class="navbar">
+        <a href="{% url 'home' %}">HOME</a>
+        <a href="{% url 'destination_list' %}">DESTINOS</a>
+        <a href="{% url 'contact' %}">CONTATO</a>
+        <a href="{% url 'about' %}">SOBRE</a>
+        <a href="{% url 'wishlist_view' %}">DESEJOS</a>
+        <div class="login-register">
+            {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Desconectar</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">LOGIN</a>
+                <a href="{% url 'register' %}">CADASTRO</a>
+            {% endif %}
+        </div>
+    </div>
+    <h2>Obrigado por entrar em contato!</h2>
+    <p>Sua mensagem foi enviada com sucesso. Responderemos em breve.</p>
+</body>
+</html>

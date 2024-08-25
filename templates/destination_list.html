@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Destinos</title>
-     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'roboto', sans-serif;
@@ -11,7 +11,7 @@
             color: #333;
             text-align: center;
             margin: 0;
-            padding-top: 60px; 
+            padding-top: 60px;
         }
 
         .navbar {
@@ -19,23 +19,23 @@
             top: 0px;
             right: 0px;
             width: 100%;
-            background-color: #4a90e2; 
+            background-color: #4a90e2;
             display: flex;
             justify-content: space-between;
-            align-items: center; 
+            align-items: center;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000; 
-            padding: 0 20px; 
-            box-sizing: border-box; 
-            height: 50px; 
+            z-index: 1000;
+            padding: 0 20px;
+            box-sizing: border-box;
+            height: 50px;
         }
 
         .navbar a {
             color: white;
             text-decoration: none;
             font-weight: 700;
-            padding: 0 10px; 
-            line-height: 50px; 
+            padding: 0 10px;
+            line-height: 50px;
         }
 
         .navbar a:hover {
@@ -68,7 +68,7 @@
 
         .destination-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); 
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             padding: 20px;
             justify-content: center;
@@ -105,7 +105,7 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 2000; 
+            z-index: 2000;
             left: 0;
             top: 0;
             width: 100%;
@@ -113,8 +113,8 @@
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.4);
             padding-top: 1%;
-           
-            
+
+
         }
 
         .modal-content {
@@ -187,104 +187,107 @@
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="{% url 'home' %}">HOME</a>
-        <a href="{% url 'destination_list' %}">DESTINOS</a>
-        <a href="{% url 'contact' %}">CONTATO</a>
-        <a href="{% url 'about' %}">SOBRE</a>
-        <a href="{% url 'wishlist_view' %}">DESEJOS</a>
-        <div class="login-register">
-    {% if user.is_authenticated %}
-        <form method="POST" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Desconectar</button>
-        </form>
-    {% else %}
-        <a href="{% url 'login' %}">LOGIN</a>
-        <a href="{% url 'register' %}">CADASTRO</a>
-    {% endif %}
+<div class="navbar">
+    <a href="{% url 'home' %}">HOME</a>
+    <a href="{% url 'destination_list' %}">DESTINOS</a>
+    <a href="{% url 'contact' %}">CONTATO</a>
+    <a href="{% url 'about' %}">SOBRE</a>
+    <a href="{% url 'wishlist_view' %}">DESEJOS</a>
+    <div class="login-register">
+        {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Desconectar</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">LOGIN</a>
+            <a href="{% url 'register' %}">CADASTRO</a>
+        {% endif %}
+    </div>
+
 </div>
 
-    </div>
+<h1>Destinos Disponíveis!</h1>
 
-    <h1>Destinos Disponíveis!</h1>
+<!-- Botões para filtrar por continente -->
+<div class="filters">
+    <a href="?continent=AS">
+        <button>Ásia</button>
+    </a>
+    <a href="?continent=EU">
+        <button>Europa</button>
+    </a>
+    <a href="?continent=NA">
+        <button>América do Norte</button>
+    </a>
+    <a href="?continent=SA">
+        <button>América do Sul</button>
+    </a>
+    <a href="?continent=AF">
+        <button>África</button>
+    </a>
+    <a href="?continent=OC">
+        <button>Oceania</button>
+    </a>
+    <a href="?continent=AN">
+        <button>Antártica</button>
+    </a>
+    <a href="/destinations/">
+        <button>Todos</button>
+    </a>
+</div>
 
-    <!-- Botões para filtrar por continente -->
-    <div class="filters">
-        <a href="?continent=AS">
-            <button>Ásia</button>
-        </a>
-        <a href="?continent=EU">
-            <button>Europa</button>
-        </a>
-        <a href="?continent=NA">
-            <button>América do Norte</button>
-        </a>
-        <a href="?continent=SA">
-            <button>América do Sul</button>
-        </a>
-        <a href="?continent=AF">
-            <button>África</button>
-        </a>
-        <a href="?continent=OC">
-            <button>Oceania</button>
-        </a>
-        <a href="?continent=AN">
-            <button>Antártica</button>
-        </a>
-        <a href="/destinations/">
-            <button>Todos</button>
-        </a>
-    </div>
+<!-- Lista de destinos filtrados -->
+<div class="destination-grid">
+    {% for destination in destinations %}
+        <div class="destination-item" onclick="openModal('{{ destination.id }}')">
+            <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
+            <h2>{{ destination.name }}</h2>
+        </div>
 
-    <!-- Lista de destinos filtrados -->
-    <div class="destination-grid">
-        {% for destination in destinations %}
-            <div class="destination-item" onclick="openModal('{{ destination.id }}')">
+        <!-- Modal para cada destino -->
+        <div id="modal-{{ destination.id }}" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('{{ destination.id }}')">&times;</span>
                 <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
                 <h2>{{ destination.name }}</h2>
-            </div>
-
-            <!-- Modal para cada destino -->
-            <div id="modal-{{ destination.id }}" class="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal('{{ destination.id }}')">&times;</span>
-                    <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
-                    <h2>{{ destination.name }}</h2>
-                    <p><strong>Continente:</strong> {{ destination.continent }}</p>
-                    <div class="description-box">
-                        <p>{{ destination.description }}</p>
-                    </div>
-                    <div class="wishlist-buttons">
-                        <form method="POST" action="{% url 'add_to_wishlist' destination.id %}" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" {% if destination in request.user.wishlist.destinations.all %}disabled{% endif %}>
-                                Adicionar à Lista de Desejos
-                            </button>
-                        </form>
-                        <form method="POST" action="{% url 'remove_from_wishlist' destination.id %}" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" {% if destination not in request.user.wishlist.destinations.all %}disabled{% endif %}>
-                                Remover da Lista de Desejos
-                            </button>
-                        </form>
-                    </div>
+                <p><strong>Continente:</strong> {{ destination.continent }}</p>
+                <div class="description-box">
+                    <p>{{ destination.description }}</p>
+                </div>
+                <div class="wishlist-buttons">
+                    <form method="POST" action="{% url 'add_to_wishlist' destination.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit"
+                                {% if destination in request.user.wishlist.destinations.all %}disabled{% endif %}>
+                            Adicionar à Lista de Desejos
+                        </button>
+                    </form>
+                    <form method="POST" action="{% url 'remove_from_wishlist' destination.id %}"
+                          style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit"
+                                {% if destination not in request.user.wishlist.destinations.all %}disabled{% endif %}>
+                            Remover da Lista de Desejos
+                        </button>
+                    </form>
                 </div>
             </div>
-        {% empty %}
-            <p>Não há destinos para este continente.</p>
-        {% endfor %}
-    </div>
+        </div>
+    {% empty %}
+        <p>Não há destinos para este continente.</p>
+    {% endfor %}
+</div>
 
-    <script>
-        function openModal(id) {
-            document.getElementById('modal-' + id).style.display = "block";
-        }
+<script>
+    function openModal(id) {
+        document.getElementById('modal-' + id).style.display = "block";
+    }
 
-        function closeModal(id) {
-            document.getElementById('modal-' + id).style.display = "none";
-        }
-    </script>
+    function closeModal(id) {
+        document.getElementById('modal-' + id).style.display = "none";
+    }
+</script>
 
 </body>
 </html>

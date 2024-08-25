@@ -1,10 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>contato</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contate-nos</title>
 </head>
-<body>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-image: url('/media/assets_images/contactbg.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        padding-left: 15%;
+    }
+    .navbar {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        padding: 0 20px;
+        box-sizing: border-box;
+        height: 50px;
+    }
 
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        padding: 0 10px;
+        line-height: 50px;
+    }
+
+    .navbar a:hover {
+        text-decoration: underline;
+    }
+
+    .login-register {
+        display: flex;
+        align-items: center;
+    }
+
+    .contact-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 28%;
+        text-align: center;
+        display: flex;
+        justify-content: left;
+        margin-left: 0; 
+    }
+
+    .contact-form h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: none;
+        height: 100px;
+    }
+
+    button[type="submit"] {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    p {
+        margin-top: 15px;
+        font-size: 12px;
+    }
+
+    p a {
+        color: #007BFF;
+        text-decoration: none;
+    }
+
+    p a:hover {
+        text-decoration: underline;
+    }
+
+</style>
+<body>
+    <div class="navbar">
+        <a href="{% url 'home' %}">HOME</a>
+        <a href="{% url 'destination_list' %}">DESTINOS</a>
+        <a href="{% url 'contact' %}">CONTATO</a>
+        <a href="{% url 'about' %}">SOBRE</a>
+        <a href="{% url 'wishlist_view' %}">DESEJOS</a>
+        <div class="login-register">
+            {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Desconectar</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">LOGIN</a>
+                <a href="{% url 'register' %}">CADASTRO</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="contact-container">
+        <div class="contact-form">
+            <h2>CONTATE-NOS</h2>
+            <form method="POST" action="{% url 'contact' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.name }}
+                </div>
+                <div class="form-group">
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    {{ form.message }}
+                </div>
+                <button type="submit">ENVIAR</button>
+            </form>
+            <p>Imagens de <a href="https://www.freepik.com" target="_blank">Freepik</a></p>
+        </div>
+    </div>
 </body>
 </html>

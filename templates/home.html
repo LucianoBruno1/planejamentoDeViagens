@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    {% load static %}  
+    {% load static %}
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-          body, html {
+        body, html {
             margin: 0;
             padding: 0;
             font-family: 'Roboto', sans-serif;
@@ -66,20 +66,20 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
-            align-items: center; 
+            align-items: center;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000; 
-            padding: 0 20px; 
-            box-sizing: border-box; 
-            height: 50px; 
+            z-index: 1000;
+            padding: 0 20px;
+            box-sizing: border-box;
+            height: 50px;
         }
 
         .navbar a {
             color: white;
             text-decoration: none;
             font-weight: 700;
-            padding: 0 10px; 
-            line-height: 50px; 
+            padding: 0 10px;
+            line-height: 50px;
         }
 
         .navbar a:hover {
@@ -92,34 +92,34 @@
         }
 
     </style>
-    
+
 </head>
 <body>
-    <div class="bg-image">
-        <div class="navbar">
-            <a href="{% url 'home' %}">HOME</a>
-            <a href="{% url 'destination_list' %}">DESTINOS</a>
-            <a href="{% url 'contact' %}">CONTATO</a>
-            <a href="{% url 'about' %}">SOBRE</a>
-            <a href="{% url 'wishlist_view' %}">DESEJOS</a>
-            <div class="login-register">
-    {% if user.is_authenticated %}
-        <form method="POST" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Desconectar</button>
-        </form>
-    {% else %}
-        <a href="{% url 'login' %}">LOGIN</a>
-        <a href="{% url 'register' %}">CADASTRO</a>
-    {% endif %}
-</div>
+<div class="bg-image">
+    <div class="navbar">
+        <a href="{% url 'home' %}">HOME</a>
+        <a href="{% url 'destination_list' %}">DESTINOS</a>
+        <a href="{% url 'contact' %}">CONTATO</a>
+        <a href="{% url 'about' %}">SOBRE</a>
+        <a href="{% url 'wishlist_view' %}">DESEJOS</a>
+        <div class="login-register">
+            {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Desconectar</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">LOGIN</a>
+                <a href="{% url 'register' %}">CADASTRO</a>
+            {% endif %}
+        </div>
 
-        </div>
-        <div class="content">
-            <h1>EXPLORE O MUNDO</h1>
-            <p>TESTETESTETESTETESTETESTE</p>
-            <a href="#">VEM CONFERIR</a>
-        </div>
     </div>
+    <div class="content">
+        <h1>EXPLORE O MUNDO</h1>
+        <p>TESTETESTETESTETESTETESTE</p>
+        <a href="#">VEM CONFERIR</a>
+    </div>
+</div>
 </body>
 </html>

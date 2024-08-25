@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
-     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-    font-family: 'roboto', sans-serif;
-    background-color: #e7f0f7; /* Cor de fundo de fallback caso a imagem não carregue */
-    background-image: url('/media/assets_images/aboutbg.jpg');
-    background-size: cover; 
-    background-position: center; 
-    background-attachment: fixed; 
-    color: black;
-    margin: 0;
-    padding: 0;
-}
+            font-family: 'roboto', sans-serif;
+            background-color: #e7f0f7; /* Cor de fundo de fallback caso a imagem não carregue */
+            background-image: url('/media/assets_images/aboutbg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: black;
+            margin: 0;
+            padding: 0;
+        }
 
 
         .header {
@@ -31,28 +31,28 @@
             align-items: center;
         }
 
-         .navbar {
+        .navbar {
             position: fixed;
             top: 0px;
             right: 0px;
             width: 100%;
-            background-color: #4a90e2; 
+            background-color: #4a90e2;
             display: flex;
             justify-content: space-between;
-            align-items: center; 
+            align-items: center;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000; 
-            padding: 0 20px; 
-            box-sizing: border-box; 
-            height: 50px; 
+            z-index: 1000;
+            padding: 0 20px;
+            box-sizing: border-box;
+            height: 50px;
         }
 
         .navbar a {
             color: white;
             text-decoration: none;
             font-weight: 700;
-            padding: 0 10px; 
-            line-height: 50px; 
+            padding: 0 10px;
+            line-height: 50px;
         }
 
         .navbar a:hover {
@@ -63,6 +63,7 @@
             display: flex;
             align-items: center;
         }
+
         .header h1 {
             font-size: 3em;
             margin: 0;
@@ -89,8 +90,7 @@
             padding: 10px;
             background-color: #4a90e2;
             border-radius: 8px;
-            font-weight: 700;
-            ;
+            font-weight: 700;;
         }
 
         .service img {
@@ -109,73 +109,73 @@
     </style>
 </head>
 <body>
-        <div class="navbar">
-            <a href="{% url 'home' %}">HOME</a>
-            <a href="{% url 'destination_list' %}">DESTINOS</a>
-            <a href="{% url 'contact' %}">CONTATO</a>
-            <a href="{% url 'about' %}">SOBRE</a>
-            <a href="{% url 'wishlist_view' %}">DESEJOS</a>
-            <div class="login-register">
-    {% if user.is_authenticated %}
-        <form method="POST" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Desconectar</button>
-        </form>
-    {% else %}
-        <a href="{% url 'login' %}">LOGIN</a>
-        <a href="{% url 'register' %}">CADASTRO</a>
-    {% endif %}
+<div class="navbar">
+    <a href="{% url 'home' %}">HOME</a>
+    <a href="{% url 'destination_list' %}">DESTINOS</a>
+    <a href="{% url 'contact' %}">CONTATO</a>
+    <a href="{% url 'about' %}">SOBRE</a>
+    <a href="{% url 'wishlist_view' %}">DESEJOS</a>
+    <div class="login-register">
+        {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Desconectar</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">LOGIN</a>
+            <a href="{% url 'register' %}">CADASTRO</a>
+        {% endif %}
+    </div>
+
+</div>
+<div class="header">
+    <h1>SOBRE A GENTE</h1>
+    <p>VEM NOS CONHECER!</p>
 </div>
 
-        </div>
-    <div class="header">
-        <h1>SOBRE A GENTE</h1>
-        <p>VEM NOS CONHECER!</p>
+<div class="services">
+    <div class="service">
+        <img src="/media/assets_images/pessoas-juntas-icon.png" alt="Icon 1">
+        <h3>Quem somos?</h3>
+        <p>Somos um grupo independente de entusiastas de viagens, dedicados a compartilhar
+            nossa paixão por explorar o mundo! Criamos este site para oferecer informações
+            detalhadas e inspiradoras sobre destinos ao redor do planeta, com o objetivo de
+            ajudar outros amantes de viagens a planejar suas próximas aventuras. Aqui, você
+            encontrará dicas, histórias e insights de viajantes que, como você, buscam descobrir
+            o melhor que o mundo tem a oferecer. Junte-se a nós e deixe-se inspirar para sua
+            próxima jornada!</p>
     </div>
-
-    <div class="services">
-        <div class="service">
-            <img src="/media/assets_images/pessoas-juntas-icon.png" alt="Icon 1">
-            <h3>Quem somos?</h3>
-            <p>Somos um grupo independente de entusiastas de viagens, dedicados a compartilhar
-                nossa paixão por explorar o mundo! Criamos este site para oferecer informações
-                detalhadas e inspiradoras sobre destinos ao redor do planeta, com o objetivo de
-                ajudar outros amantes de viagens a planejar suas próximas aventuras. Aqui, você
-                encontrará dicas, histórias e insights de viajantes que, como você, buscam descobrir
-                o melhor que o mundo tem a oferecer. Junte-se a nós e deixe-se inspirar para sua
-                próxima jornada!</p>
-        </div>
-        <div class="service">
-            <img src="/media/assets_images/ponto-de-interrogacao-icon.png" alt="Icon 2">
-            <h3>Oque queremos?</h3>
-            <p>Nosso objetivo é proporcionar uma fonte confiável e envolvente de informações para
-                todos os apaixonados por viagens. Queremos inspirar e informar, oferecendo uma visão
-                profunda e detalhada de destinos ao redor do mundo. Nosso compromisso é reunir
-                conteúdo relevante e atualizado, ajudando você a planejar suas aventuras com
-                confiança e entusiasmo. Buscamos criar uma comunidade de viajantes curiosos e
-                bem-informados, compartilhando experiências e descobertas que enriquecem cada jornada.</p>
-        </div>
-        <div class="service">
-            <img src="/media/assets_images/nossa-filosofia-icon.png" alt="Icon 3">
-            <h3>Nossa filosofia</h3>
-            <p>Acreditamos que cada viagem é uma oportunidade única para explorar e
-                entender o mundo de novas maneiras. Nossa filosofia é baseada na autenticidade
-                e na paixão por viagens verdadeiras. Procuramos apresentar informações que não
-                só inspiram, mas também ajudam a planejar experiências genuínas. Valorizamos a
-                diversidade cultural e buscamos mostrar os destinos através das lentes dos
-                viajantes, com dicas e insights que vão além dos guias tradicionais..</p>
-        </div>
-        <div class="service">
-            <img src="/media/assets_images/contribua-conosco-icon.png" alt="Icon 4">
-            <h3>Contribua conosco!</h3>
-            <p>Adoramos ouvir histórias e experiências de outros viajantes! Se você
-                tem uma aventura incrível para compartilhar ou uma dica valiosa sobre
-                um destino, entre em contato conosco. Sua contribuição pode ajudar a
-                enriquecer nosso conteúdo e inspirar outros viajantes a explorar novos
-                lugares. Juntos, podemos criar uma rica comunidade de entusiastas de viagens
-                que compartilham a mesma paixão por descobrir o mundo. .</p>
-        </div>
+    <div class="service">
+        <img src="/media/assets_images/ponto-de-interrogacao-icon.png" alt="Icon 2">
+        <h3>Oque queremos?</h3>
+        <p>Nosso objetivo é proporcionar uma fonte confiável e envolvente de informações para
+            todos os apaixonados por viagens. Queremos inspirar e informar, oferecendo uma visão
+            profunda e detalhada de destinos ao redor do mundo. Nosso compromisso é reunir
+            conteúdo relevante e atualizado, ajudando você a planejar suas aventuras com
+            confiança e entusiasmo. Buscamos criar uma comunidade de viajantes curiosos e
+            bem-informados, compartilhando experiências e descobertas que enriquecem cada jornada.</p>
     </div>
+    <div class="service">
+        <img src="/media/assets_images/nossa-filosofia-icon.png" alt="Icon 3">
+        <h3>Nossa filosofia</h3>
+        <p>Acreditamos que cada viagem é uma oportunidade única para explorar e
+            entender o mundo de novas maneiras. Nossa filosofia é baseada na autenticidade
+            e na paixão por viagens verdadeiras. Procuramos apresentar informações que não
+            só inspiram, mas também ajudam a planejar experiências genuínas. Valorizamos a
+            diversidade cultural e buscamos mostrar os destinos através das lentes dos
+            viajantes, com dicas e insights que vão além dos guias tradicionais..</p>
+    </div>
+    <div class="service">
+        <img src="/media/assets_images/contribua-conosco-icon.png" alt="Icon 4">
+        <h3>Contribua conosco!</h3>
+        <p>Adoramos ouvir histórias e experiências de outros viajantes! Se você
+            tem uma aventura incrível para compartilhar ou uma dica valiosa sobre
+            um destino, entre em contato conosco. Sua contribuição pode ajudar a
+            enriquecer nosso conteúdo e inspirar outros viajantes a explorar novos
+            lugares. Juntos, podemos criar uma rica comunidade de entusiastas de viagens
+            que compartilham a mesma paixão por descobrir o mundo. .</p>
+    </div>
+</div>
 
 </body>
 </html>
