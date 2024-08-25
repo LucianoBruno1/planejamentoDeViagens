@@ -137,10 +137,18 @@
             <a href="{% url 'contact' %}">CONTATO</a>
             <a href="{% url 'about' %}">SOBRE</a>
             <a href="{% url 'wishlist_view' %}">DESEJOS</a>
-            <div class="login-register">
-                <a href="{% url 'login' %}">LOGIN</a>
-                <a href="{% url 'register' %}">CADASTRO</a>
-            </div>
+           <div class="login-register">
+    {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Desconectar</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">LOGIN</a>
+        <a href="{% url 'register' %}">CADASTRO</a>
+    {% endif %}
+</div>
+
         </div>
 
     <!-- Container do registro -->
