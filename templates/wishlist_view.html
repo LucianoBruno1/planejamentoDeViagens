@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Desejos</title>
+     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* O mesmo estilo que você utilizou na página de destinos */
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'roboto', sans-serif;
             background-color: #e7f0f7;
             color: #333;
             text-align: center;
@@ -176,8 +177,8 @@
         <a href="{% url 'home' %}">HOME</a>
         <a href="{% url 'destination_list' %}">DESTINOS</a>
         <a href="#">CONTATO</a>
-        <a href="#">SOBRE</a>
-        <a href="{% url 'wishlist_view' %}">Desejos</a>
+        <a href="{% url 'about' %}">SOBRE</a>
+        <a href="{% url 'wishlist_view' %}">DESEJOS</a>
         <div class="login-register">
             <a href="{% url 'login' %}">LOGIN</a>
             <a href="{% url 'register' %}">CADASTRO</a>

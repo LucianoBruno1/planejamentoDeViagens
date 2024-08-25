@@ -23,6 +23,9 @@ def register(request):
 
 def profile(request):
     return render(request, 'profile.html')
+
+def about(request):
+    return render(request, 'about.html')
 def user_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)

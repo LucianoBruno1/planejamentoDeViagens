@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'roboto', sans-serif;
+            background-color: #e7f0f7;
+            color: black;
+            margin: 0;
+            padding: 0;
+        }
+       
+
+        .header {
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            text-align: center;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+         .navbar {
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            width: 100%;
+            background-color: #4a90e2; /* Cor do fundo azul */
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Alinha itens verticalmente */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* Garantir que o navbar fique por cima do conteúdo */
+            padding: 0 20px; /* Espaçamento interno lateral */
+            box-sizing: border-box; /* Inclui padding na largura total */
+            height: 50px; /* Altura fixa para o navbar */
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 10px; /* Ajuste de padding lateral */
+            line-height: 50px; /* Alinha verticalmente com base na altura do navbar */
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .login-register {
+            display: flex;
+            align-items: center;
+        }
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        .header p {
+            margin: 10px 0 0;
+            font-size: 1.5em;
+        }
+
+        .services {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #333;
+        }
+
+        .service {
+            text-align: center;
+            width: 20%;
+            padding: 10px;
+            background-color: #FF7F50;
+            border-radius: 8px;
+        }
+
+        .service img {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+
+        .service h3 {
+            margin-bottom: 10px;
+        }
+
+        .service p {
+            margin-bottom: 20px;
+        }
+
+        .call-to-action {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .call-to-action button {
+            background-color: #FF7F50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+        .footer {
+            background-color: #444;
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+        <div class="navbar">
+            <a href="{% url 'home' %}">HOME</a>
+            <a href="{% url 'destination_list' %}">DESTINOS</a>
+            <a href="#">CONTATO</a>
+            <a href="{% url 'about' %}">SOBRE</a>
+            <a href="{% url 'wishlist_view' %}">DESEJOS</a>
+            <div class="login-register">
+                <a href="{% url 'login' %}">LOGIN</a>
+                <a href="{% url 'register' %}">CADASTRO</a>
+            </div>
+        </div>
+    <div class="header">
+        <h1>Agência de Viagens Wanderlust</h1>
+        <p>Sobre nós</p>
+    </div>
+
+    <div class="services">
+        <div class="service">
+            <img src="path-to-icon1.png" alt="Icon 1">
+            <h3>Passeios</h3>
+            <p>Descrição dos passeios organizados pela agência.</p>
+        </div>
+        <div class="service">
+            <img src="path-to-icon2.png" alt="Icon 2">
+            <h3>Caminhadas</h3>
+            <p>Descrição das caminhadas e trilhas organizadas pela agência.</p>
+        </div>
+        <div class="service">
+            <img src="path-to-icon3.png" alt="Icon 3">
+            <h3>Viagem</h3>
+            <p>Descrição das viagens organizadas pela agência.</p>
+        </div>
+        <div class="service">
+            <img src="path-to-icon4.png" alt="Icon 4">
+            <h3>Apoiar</h3>
+            <p>Como a agência pode ajudar e apoiar os viajantes.</p>
+        </div>
+    </div>
+
+    <div class="call-to-action">
+        <h2>O mundo é um lugar grande. Nós o ajudaremos a explorá-lo.</h2>
+        <button>Comece sua jornada agora!</button>
+    </div>
+
+    <div class="footer">
+        <p>Recreação ao ar livre</p>
+    </div>
+</body>
+</html>

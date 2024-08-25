@@ -60,26 +60,35 @@
         }
 
         .navbar {
-            position: absolute;
-            top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 80px;
+            position: fixed;
+            top: 0px;
+            right: 0px;
             width: 100%;
-
-        }
-        .navbar .login-register {
-            padding-left: 20%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Alinha itens verticalmente */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* Garantir que o navbar fique por cima do conteúdo */
+            padding: 0 20px; /* Espaçamento interno lateral */
+            box-sizing: border-box; /* Inclui padding na largura total */
+            height: 50px; /* Altura fixa para o navbar */
         }
 
         .navbar a {
             color: white;
             text-decoration: none;
             font-weight: 700;
+            padding: 0 10px; /* Ajuste de padding lateral */
+            line-height: 50px; /* Alinha verticalmente com base na altura do navbar */
         }
 
         .navbar a:hover {
             text-decoration: underline;
+        }
+
+        .login-register {
+            display: flex;
+            align-items: center;
         }
 
     </style>
@@ -91,8 +100,8 @@
             <a href="{% url 'home' %}">HOME</a>
             <a href="{% url 'destination_list' %}">DESTINOS</a>
             <a href="#">CONTATO</a>
-            <a href="#">SOBRE</a>
-            <a href="{% url 'wishlist_view' %}">Desejos</a>
+            <a href="{% url 'about' %}">SOBRE</a>
+            <a href="{% url 'wishlist_view' %}">DESEJOS</a>
             <div class="login-register">
                 <a href="{% url 'login' %}">LOGIN</a>
                 <a href="{% url 'register' %}">CADASTRO</a>
