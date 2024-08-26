@@ -60,3 +60,6 @@ Alteração de lista de desejos, para usuários registrados, pelo administrador
     Envio de email para a administração do sistema
   </li>
 </ul>
+<h2>Instruções</h2>
+<p>Para rodar o projeto localmente é necessário instalar dois pacotes</p>
+<p><strong>pip install Django<br>pip install Pillow</strong></p>
