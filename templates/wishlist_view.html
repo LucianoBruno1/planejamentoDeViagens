@@ -37,10 +37,11 @@
             font-weight: 700;
             padding: 0 10px;
             line-height: 50px;
+            transition: .2s;
         }
 
         .navbar a:hover {
-            text-decoration: underline;
+            color: gold;
         }
 
         .login-register {
@@ -86,6 +87,8 @@
 
         .modal {
             display: none;
+            align-items: center;
+            justify-content: center;
             position: fixed;
             z-index: 2000;
             left: 0;
@@ -98,7 +101,7 @@
         }
 
         .modal-content {
-            max-width: 600px;
+            max-width: 800px;
             width: 100%;
             max-height: 90vh;
             margin: 0 auto;
@@ -107,7 +110,6 @@
             border-radius: 8px;
             overflow-y: auto;
         }
-
         .modal-content img {
             width: 100%;
             border-radius: 10px;
@@ -246,11 +248,17 @@
 
 <script>
     function openModal(id) {
-        document.getElementById('modal-' + id).style.display = "block";
+        document.getElementById('modal-' + id).style.display = "flex";
     }
 
     function closeModal(id) {
         document.getElementById('modal-' + id).style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target.className === 'modal') {
+            event.target.style.display = "none";
+        }
     }
 </script>
 

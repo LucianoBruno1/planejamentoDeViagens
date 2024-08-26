@@ -79,10 +79,11 @@
             font-weight: 700;
             padding: 0 10px;
             line-height: 50px;
+            transition: .2s;
         }
 
         .navbar a:hover {
-            text-decoration: underline;
+            color: gold;
         }
 
         .login-register {
@@ -131,8 +132,14 @@
     </div>
     <div class="content">
         <h1>EXPLORE O MUNDO</h1>
-        <p>TESTETESTETESTETESTETESTE</p>
-        <a href="#">VEM CONFERIR</a>
+        <p>Este espaço foi criado com o objetivo de compartilhar informações
+            e inspirações para destinos ao redor do mundo. Navegue pelos destinos, 
+            explore as opções disponíveis e adicione seus favoritos à lista de
+            desejos. Estamos aqui para ajudar você a planejar suas próximas 
+            aventuras, seja para um passeio rápido ou uma viagem dos sonhos. 
+            Sinta-se à vontade para explorar e entrar em contato caso tenha 
+            dúvidas ou sugestões!</p>
+        <a href="{% url 'destination_list' %}">VEM CONFERIR</a>
     </div>
 </div>
 </body>
