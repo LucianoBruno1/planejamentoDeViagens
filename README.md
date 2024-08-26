@@ -1,6 +1,6 @@
 <h1>Sistema web para planejamento de viagens</h1>
-<img src="http://img.shields.io/static/v1?label=STATUS&message=%20CONCLUÍDO&color=GREEN&style=for-the-badge"/>
-<p>Projeto para a disciplina de "Projeto de desenvolvimento web", no instituto federal de Pernambuco.  </p>
+<img src="http://img.shields.io/static/v1?label=STATUS&message=%20CONCLUIDO&color=GREEN&style=for-the-badge"/>
+<p>Projeto para a disciplina de "Projeto de desenvolvimento web", no instituto federal de Pernambuco (IFPE).  </p>
 
 <h3>Tecnologias em uso</h3>
 <ul>
