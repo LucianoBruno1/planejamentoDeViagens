@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from .models import Wishlist
 from destinations.models import Destination
 
+
 @login_required
 def add_to_wishlist(request, destination_id):
     destination_wishlist = get_object_or_404(Destination, id=destination_id)
@@ -18,10 +19,12 @@ def add_to_wishlist(request, destination_id):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
+
 @login_required
 def wishlist_view(request):
     wishlist, created = Wishlist.objects.get_or_create(user=request.user)
     return render(request, 'wishlist_view.html', {'wishlist': wishlist})
+
 
 @login_required
 def remove_from_wishlist(request, destination_id):

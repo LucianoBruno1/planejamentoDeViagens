@@ -61,6 +61,7 @@
             margin: 5px;
             cursor: pointer;
             border-radius: 5px;
+            font-weight: 700;
         }
 
         .filters button:hover {
@@ -222,33 +223,33 @@
     </div>
 </div>
 
-<h1>Destinos Disponíveis!</h1>
+<h1>DESTINOS DISPONÍVEIS</h1>
 
 <!-- Botões para filtrar por continente -->
 <div class="filters">
     <a href="?continent=AS">
-        <button>Ásia</button>
+        <button>ÁSIA</button>
     </a>
     <a href="?continent=EU">
-        <button>Europa</button>
+        <button>EUROPA</button>
     </a>
     <a href="?continent=NA">
-        <button>América do Norte</button>
+        <button>AMÉRICA DO NORTE</button>
     </a>
     <a href="?continent=SA">
-        <button>América do Sul</button>
+        <button>AMÉRICA DO SUL</button>
     </a>
     <a href="?continent=AF">
-        <button>África</button>
+        <button>ÁFRICA</button>
     </a>
     <a href="?continent=OC">
-        <button>Oceania</button>
+        <button>OCEANIA</button>
     </a>
     <a href="?continent=AN">
-        <button>Antártica</button>
+        <button>ANTÁRTICA</button>
     </a>
     <a href="/destinations/">
-        <button>Todos</button>
+        <button>TODOS</button>
     </a>
 </div>
 
@@ -303,7 +304,7 @@
         document.getElementById('modal-' + id).style.display = "none";
     }
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target.className === 'modal') {
             event.target.style.display = "none";
         }

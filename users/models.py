@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.models import UserManager as DefaultUserManager
 
+
 class CustomUserManager(DefaultUserManager):
     def create_user(self, username, email, password=None, **extra_fields):
         if not email:
@@ -26,4 +27,3 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
-

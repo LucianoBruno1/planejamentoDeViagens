@@ -11,6 +11,7 @@ from .forms import ContactForm
 
 User = get_user_model()
 
+
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -27,8 +28,10 @@ def register(request):
 def profile(request):
     return render(request, 'profile.html')
 
+
 def contact(request):
     return render(request, 'contact.html')
+
 
 def contact_view(request):
     if request.method == 'POST':
@@ -67,9 +70,10 @@ def contact_view(request):
     return render(request, 'contact.html', {'form': form})
 
 
-
 def about(request):
     return render(request, 'about.html')
+
+
 def user_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -81,7 +85,8 @@ def user_login(request):
                 login(request, user)
                 return redirect('home')
         else:
-            return render(request, 'registration/login.html', {'form': form, 'error': 'Nome de usuário ou senha inválidos'})
+            return render(request, 'registration/login.html',
+                          {'form': form, 'error': 'Nome de usuário ou senha inválidos'})
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})

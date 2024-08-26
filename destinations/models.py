@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Destination(models.Model):
     CONTINENT_CHOICES = [
         ('AF', 'África'),
@@ -13,7 +14,7 @@ class Destination(models.Model):
 
     id = models.AutoField(primary_key=True)
     image = models.ImageField(upload_to='destination_images/')
-    name = models.CharField(max_length = 50)
+    name = models.CharField(max_length=50)
     description = models.TextField()
     continent = models.CharField(max_length=2, choices=CONTINENT_CHOICES)
 

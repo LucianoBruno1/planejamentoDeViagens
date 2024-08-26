@@ -110,6 +110,7 @@
             border-radius: 8px;
             overflow-y: auto;
         }
+
         .modal-content img {
             width: 100%;
             border-radius: 10px;
@@ -217,7 +218,6 @@
         <div class="wishlist-item" onclick="openModal('{{ destination.id }}')">
             <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
             <h2>{{ destination.name }}</h2>
-            <p class="wishlist-date">Adicionado em: {{ destination.wishlist_date }}</p>
             <p>Continente: {{ destination.continent }}</p>
         </div>
 
@@ -231,7 +231,6 @@
                 <div class="description-box">
                     <p>{{ destination.description }}</p>
                 </div>
-                <p class="wishlist-date">Adicionado em: {{ destination.wishlist_date }}</p>
                 <div class="wishlist-buttons">
                     <form method="POST" action="{% url 'remove_from_wishlist' destination.id %}"
                           style="display:inline;">
@@ -255,7 +254,7 @@
         document.getElementById('modal-' + id).style.display = "none";
     }
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target.className === 'modal') {
             event.target.style.display = "none";
         }

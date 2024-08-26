@@ -19,14 +19,14 @@ class CustomUserCreationForm(UserCreationForm):
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
-        'placeholder': 'Enter your Name',
+        'placeholder': 'Insira seu nome',
         'class': 'form-control',
     }))
     email = forms.EmailField(widget=forms.EmailInput(attrs={
-        'placeholder': 'Enter a valid email address',
+        'placeholder': 'Insira seu email',
         'class': 'form-control',
     }))
-    message = forms.CharField(widget=forms.Textarea(attrs={
-        'placeholder': 'Enter your message',
+    message = forms.CharField(max_length=600, widget=forms.Textarea(attrs={
+        'placeholder': 'Sua mensagem',
         'class': 'form-control',
     }))
